@@ -1,0 +1,77 @@
+{
+  "name": "dsh-plugin-prompt-tips",
+  "version": "0.2.1",
+  "description": "DSH 悬浮精灵「Prompt 小精灵」：每小时从内置资源库推荐一条 OpenAI/Anthropic 官方近期 prompt 技巧并讲清为什么；支持换肤、‹›翻历史（≤10 条）、手动捞一条与一键同步更新。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "desktop-pet",
+    "sprite",
+    "prompt",
+    "prompt-engineering",
+    "openai",
+    "anthropic",
+    "productivity",
+    "prompt-tips"
+  ],
+  "type": "module",
+  "main": "./index.js",
+  "icon": "assets/icon.svg",
+  "author": "Yuna",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuna78/dsh-prompt-tips.git"
+  },
+  "homepage": "https://github.com/yuna78/dsh-prompt-tips#readme",
+  "bugs": {
+    "url": "https://github.com/yuna78/dsh-prompt-tips/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.2.1-rc.2 <0.3.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.1-rc.2 <0.3.0"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./icon": "./assets/icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "assets/",
+    "resources/",
+    "docs/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE",
+    "package.json"
+  ],
+  "scripts": {
+    "test": "node verify/smoke.mjs && node verify/contract.mjs && node verify/render.mjs && node verify/host.test.mjs",
+    "validate:resources": "node scripts/validate-resources.mjs",
+    "prepublishOnly": "node verify/smoke.mjs && node scripts/validate-resources.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout"
+      ]
+    }
+  }
+}

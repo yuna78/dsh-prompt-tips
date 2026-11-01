@@ -1,0 +1,24 @@
+# dsh-plugin-prompt-tips bundle patch
+#
+# 插件的 Host 行（同时通过 package.json 的 dsh.client 加载 client.js）。
+# 资源库、皮肤与同步 URL 的绝对路径由 index.js 在运行时按自身包目录计算，
+# 因此这里不需要硬编码用户目录。syncUrl 默认指向本项目 GitHub raw 发布地址，
+# 想用私有镜像时在 config 里覆盖。
+
+- insert:
+    - id: dsh-prompt-tips
+      name: dsh-plugin-prompt-tips
+      config:
+        enabled: true
+        everySeconds: 3600      # 每小时一条
+        firstDelaySeconds: 90   # 启动后 90s 先来一次
+        quietHours: [2, 8]      # 本地时间 02:00–08:00 不打扰
+        maxHistory: 10          # 需求 6：上一条/下一条最多 10 条
+        dailyLimit: 24
+        headless: true          # v0.2：模型个性化推荐理由；false = 只用资料库预写理由
+        timeoutMs: 120000
+        # syncUrl 不写即用内置默认（GitHub raw 的 resources/index.json）
+        # syncUrl: https://raw.githubusercontent.com/yuna78/dsh-prompt-tips/main/resources/index.json
+        businessContext: |-
+          用户是一位使用 AI 编程工具的开发者，关心怎么把 prompt 写得让模型
+          一次做对：结构化、少样本、验证输出。

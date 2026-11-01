@@ -1,0 +1,25 @@
+# NOTICE — 素材与内容来源
+
+## 代码
+
+以 MIT 授权（见 LICENSE），与 DeepSeek / OpenAI / Anthropic 均无隶属关系。
+
+## 立绘与图标（assets/）
+
+三套精灵皮肤（星尘小妖、像素小幽灵、蘑菇小精灵）与 `assets/icon.svg`
+均为本项目原创自绘矢量素材（SVG），创作记录见 `assets/PROVENANCE.md`，
+无第三方素材。
+
+## 资源库（resources/）
+
+`resources/index.json` 中的每条 prompt 技巧均整理自 OpenAI 与 Anthropic
+官方公开页面（文档、帮助中心、官方博客），每条都带有来源 URL 与来源月份
+（仅收录近 6 个月内容，更早的条目会被校验拒绝）。收录行为仅为个人学习与
+使用之便的引用与整理：
+
+- prompt 正文的模板/示例版权归其原作者（OpenAI / Anthropic 或页面标注作者）；
+- `why` 推荐理由为本项目撰写的转述；
+- 商标（OpenAI、ChatGPT、Anthropic、Claude 等）归其各自所有者。
+
+任何再分发请保留各条目的 `sourceUrl` 与 `sourceVendor` 字段。
+抓取与取舍记录见 `resources/research-log.md`。

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Prompt 小精灵 · 插件图标（星尘小妖简化头） -->
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c4b5fd"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 6c-13 0-20 9-20 21 0 9 3 14 6 20 2 4 5 11 14 11s12-7 14-11c3-6 6-11 6-20C52 15 45 6 32 6z" fill="url(#body)"/>
+  <circle cx="24" cy="30" r="6" fill="#fff"/>
+  <circle cx="40" cy="30" r="6" fill="#fff"/>
+  <circle cx="25.5" cy="31" r="3" fill="#312e81"/>
+  <circle cx="38.5" cy="31" r="3" fill="#312e81"/>
+  <circle cx="19" cy="38" r="2.4" fill="#fda4af" opacity=".85"/>
+  <circle cx="45" cy="38" r="2.4" fill="#fda4af" opacity=".85"/>
+  <path d="M27 42q5 4 10 0" stroke="#4c1d95" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+  <path d="M48 8l1.8 4.2L54 14l-4.2 1.8L48 20l-1.8-4.2L42 14l4.2-1.8z" fill="#fde68a"/>
+  <path d="M14 12l1.2 2.8L18 16l-2.8 1.2L14 20l-1.2-2.8L10 16l2.8-1.2z" fill="#fde68a" opacity=".9"/>
+</svg>

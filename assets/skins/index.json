@@ -1,0 +1,78 @@
+{
+  "version": 5,
+  "note": "v5：pixel 系四套（独角兽/狐狸/小鸡/小猫）经 gpt-image-2.5-flare img2img 重绘到纯绿底 + chroma 抠图（背景残留清零，人设保留）；其余五套沿用 v4 gpt-image-2 生成、PIL 抠透明底；talk 帧复用 idle，说话动画由客户端 CSS bob 承担；每套皮肤含 emo/ 状态表情（仅 hologram 两套）。",
+  "skins": [
+    {
+      "id": "hologram-drop",
+      "name": "全息水滴",
+      "dir": "hologram-drop",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#60a5fa",
+      "default": true
+    },
+    {
+      "id": "hologram-orbit",
+      "name": "全息轨道",
+      "dir": "hologram-orbit",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#a5b4fc",
+      "default": false
+    },
+    {
+      "id": "pixel-fox",
+      "name": "像素狐狸",
+      "dir": "pixel-fox",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#a78bfa",
+      "default": false
+    },
+    {
+      "id": "pixel-unicorn",
+      "name": "像素独角兽",
+      "dir": "pixel-unicorn",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#c4b5fd",
+      "default": false
+    },
+    {
+      "id": "pixel-chick",
+      "name": "像素小鸡",
+      "dir": "pixel-chick",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#7dd3fc",
+      "default": false
+    },
+    {
+      "id": "pixel-cat",
+      "name": "像素小猫",
+      "dir": "pixel-cat",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#93c5fd",
+      "default": false
+    },
+    {
+      "id": "fluff-planet",
+      "name": "绒毛星球",
+      "dir": "fluff-planet",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#fde68a",
+      "default": false
+    },
+    {
+      "id": "leaf-energy",
+      "name": "绿叶能量",
+      "dir": "leaf-energy",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#86efac",
+      "default": false
+    },
+    {
+      "id": "galaxy-astro",
+      "name": "银河宇航",
+      "dir": "galaxy-astro",
+      "frames": { "idle": "idle.png", "talk": "talk.png" },
+      "accent": "#818cf8",
+      "default": false
+    }
+  ]
+}
