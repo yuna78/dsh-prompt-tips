@@ -65,7 +65,7 @@ if (existsSync(out)) {
   mkdirSync(out, { recursive: true });
 }
 if (!existsSync(gitDir)) {
-  console.error('提示：dist/public 还不是 git 仓库。首建按 SOP：');
+  console.error(`提示：${out} 还不是 git 仓库。首建按 SOP：`);
   console.error('  cd dist/public && git init -b main && git remote add origin <public-url> && git fetch origin main && git reset --soft FETCH_HEAD');
   console.error('（之后本脚本只增量更新工作区，git 提交由发布流程执行）');
 }
@@ -124,10 +124,10 @@ const walk = (dir) => {
 };
 walk(out);
 
-console.log(`白名单构建：${copied.length} 项 → dist/public`);
+console.log(`白名单构建：${copied.length} 项 → ${out}`);
 if (hits > 0) {
   console.error(`\n隐私扫描 ${hits} 命中——拒绝放行。逐条处理后重跑。`);
   process.exit(1);
 }
 console.log('隐私扫描：0 命中，放行。');
-console.log('下一步：cd dist/public && git init && git add -A && git commit');
+console.log('下一步：在目标目录执行 git add -A && git commit && git push。');
