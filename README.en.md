@@ -25,6 +25,8 @@ See [docs/INSTALL.md](docs/INSTALL.md) for source installs and troubleshooting.
 
 ![Prompt Sprite — bubble card (Chinese translation view)](docs/screenshots/hero.png)
 
+![Real session with the personaliser enabled](docs/screenshots/real-usage.png)
+
 ![EN template view: verbatim official prompt, one-tap copy](docs/screenshots/en-template.png)
 
 ![Skin picker: 9 neutral sprite skins](docs/screenshots/skins.png)

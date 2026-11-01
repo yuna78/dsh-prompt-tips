@@ -23,6 +23,8 @@ dsh plugin --profile web add dsh-plugin-prompt-tips
 
 ![提示词小精灵——气泡卡片（中文翻译视图）](docs/screenshots/hero.png)
 
+![真实使用环境：接上模型后的个性化推荐理由](docs/screenshots/real-usage.png)
+
 ![EN 模板视图：逐字官方原文，一键复制](docs/screenshots/en-template.png)
 
 ![换肤面板：9 套中性小精灵任选](docs/screenshots/skins.png)
