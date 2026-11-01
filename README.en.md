@@ -21,6 +21,14 @@ dsh plugin --profile web add dsh-plugin-prompt-tips
 Requires DSH `>=0.2.1-rc.2 <0.3.0`, Node `^22.19.0 || >=24.0.0`, Web UI only.
 See [docs/INSTALL.md](docs/INSTALL.md) for source installs and troubleshooting.
 
+## Screenshots
+
+![Prompt Sprite — bubble card (Chinese translation view)](docs/screenshots/hero.png)
+
+![EN template view: verbatim official prompt, one-tap copy](docs/screenshots/en-template.png)
+
+![Skin picker: 9 neutral sprite skins](docs/screenshots/skins.png)
+
 ## What it does
 
 | Capability | Detail |

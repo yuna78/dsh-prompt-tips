@@ -34,7 +34,7 @@ const DIRS = [
   'docs',
   'verify',
   ['skill', ['mascot-emo']],
-  ['scripts', ['cutout_solid.py', 'validate-resources.mjs', 'update-resources.mjs', 'clean-prompts-v2.mjs', 'build-public-bundle.mjs']],
+  ['scripts', ['cutout_solid.py', 'validate-resources.mjs', 'update-resources.mjs', 'clean-prompts-v2.mjs', 'build-public-bundle.mjs', 'hero-shot.mjs']],
 ];
 
 const PRIVACY_PATTERNS = [

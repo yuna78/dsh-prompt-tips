@@ -19,6 +19,14 @@ dsh plugin --profile web add dsh-plugin-prompt-tips
 - 要求：DSH `>=0.2.1-rc.2 <0.3.0`、Node `^22.19.0 || >=24.0.0`，仅 Web 界面；
 - 从源码安装、卸载、排错：[docs/INSTALL.md](docs/INSTALL.md)。
 
+## 界面截图
+
+![提示词小精灵——气泡卡片（中文翻译视图）](docs/screenshots/hero.png)
+
+![EN 模板视图：逐字官方原文，一键复制](docs/screenshots/en-template.png)
+
+![换肤面板：9 套中性小精灵任选](docs/screenshots/skins.png)
+
 ## 小精灵
 
 ![九套中性小精灵皮肤](docs/skins-overview.png)
