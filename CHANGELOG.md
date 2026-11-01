@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.2 — 2026-11-01
+
+headless 子进程健壮性对齐 dsh-maoxuan-pet 0.3.0（新装机无 headless API 场景）。
+
+- **子进程清理 `stopChild`**：跟踪 headless 子进程句柄；插件卸载/重载时
+  SIGTERM → 5s 后 SIGKILL 兜底，杜绝挂死的子进程堆积（新机器首次 headless
+  会话初始化子 profile 时最容易卡住）；`finish` 里同步清句柄。
+- **超时默认 120s → 180s**：新机器第一次 headless 要初始化子 profile，
+  2 分钟偏紧；超时不是硬停，只是放弃本轮并如实降级为离线理由。
+- **新增 `modelHint` 配置**：透传进 headless prompt（`语言风格：…`），让
+  用户可以约束个性化理由的口吻。
+- llm 桥接（宿主 profile → headless 子进程 overlay + 凭据 refs 注入）与
+  友好报错此前已随 v0.2.1 开源快照对齐 maoxuan-pet v0.2.3，本次补齐其余
+  三处；新增 smoke 断言（超时默认 / modelHint 透传）。
+
 ## 0.2.1 — 2026-11-01
 
 用户第二轮反馈三项。

@@ -229,6 +229,14 @@ test('profile 默认 headless，可通过配置覆盖', () => {
   assert.equal(normaliseConfig({}).profile, 'headless');
   assert.equal(normaliseConfig({ profile: 'mine' }).profile, 'mine');
 });
+test('新机健壮性：超时默认 180s，modelHint 透传进 headless prompt', () => {
+  const cfg = normaliseConfig({});
+  assert.equal(cfg.timeoutMs, 180000, '首次 headless 要初始化子 profile，2 分钟偏紧');
+  assert.equal(cfg.modelHint, '');
+  const prompt = buildHeadlessPrompt(goodEntry(), { modelHint: '直接、少废话' });
+  assert.match(prompt, /语言风格：直接、少废话/);
+  assert.equal(buildHeadlessPrompt(goodEntry()).includes('语言风格'), false);
+});
 test('extractLlmPatchEntries 只取 llm 相关顶层块', () => {
   const patch = [
     '- id: dsh-prompt-tips',

@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-prompt-tips",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "DSH 悬浮精灵「Prompt 小精灵」：每小时从内置资源库推荐一条 OpenAI/Anthropic 官方近期 prompt 技巧并讲清为什么；支持换肤、‹›翻历史（≤10 条）、手动捞一条与一键同步更新。",
   "keywords": [
     "dsh",

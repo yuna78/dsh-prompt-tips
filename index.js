@@ -82,10 +82,13 @@ export function normaliseConfig(config) {
     headless: raw.headless !== false,
     dshBin: typeof raw.dshBin === 'string' && raw.dshBin.trim() ? raw.dshBin.trim() : 'dsh',
     profile: typeof raw.profile === 'string' && raw.profile.trim() ? raw.profile.trim() : 'headless',
-    timeoutMs: int(raw.timeoutMs, 120000, 10000, 900000),
+    // 180s（对齐 dsh-maoxuan-pet 0.3.0）：新机器第一次 headless 会话要初始化
+    // 子 profile，2 分钟偏紧；超时不是硬停，只是放弃本轮并降级。
+    timeoutMs: int(raw.timeoutMs, 180000, 10000, 900000),
     syncUrl: typeof raw.syncUrl === 'string' && raw.syncUrl.trim() ? raw.syncUrl.trim() : DEFAULT_SYNC_URL,
     syncTimeoutMs: int(raw.syncTimeoutMs, 30000, 5000, 300000),
     businessContext: typeof raw.businessContext === 'string' ? raw.businessContext.trim() : '',
+    modelHint: typeof raw.modelHint === 'string' ? raw.modelHint.trim() : '',
     skinId: typeof raw.skinId === 'string' ? raw.skinId.trim() : '',
   };
 }
@@ -300,7 +303,7 @@ export function backfillSplitFields(bubbles, entries) {
  * quoted verbatim inside the prompt and the model may only rephrase `why`.
  */
 export function buildHeadlessPrompt(entry, options = {}) {
-  const { businessContext = '', recentTitles = [] } = options;
+  const { businessContext = '', recentTitles = [], modelHint = '' } = options;
   const context = businessContext
     ? `用户的工作背景：${businessContext}`
     : '用户是一位使用 AI 编程工具的开发者。';
@@ -311,6 +314,7 @@ export function buildHeadlessPrompt(entry, options = {}) {
     '你是「Prompt 小精灵」，每小时向用户推荐一条来自官方资料的 prompt 技巧。',
     context,
     recent,
+    modelHint ? `语言风格：${modelHint}` : '',
     '本次要推荐的条目（Prompt 正文与标题必须逐字保留，不得改写）：',
     `标题：${entry.title}`,
     `来源：${entry.sourceVendor} · ${entry.sourceUrl} · ${entry.sourceDate}`,
@@ -780,6 +784,18 @@ export function apply(ctx, config) {
     });
 
   // --- recommendation pipeline ---------------------------------------------
+  // Child handle + stopChild（对齐 dsh-maoxuan-pet 0.3.0）：超时只 SIGTERM，
+  // 插件卸载/重载时兜底 SIGTERM→5s 后 SIGKILL，杜绝挂死的 headless 子进程
+  // 在新机器上堆积（首次运行初始化 profile 时最容易卡住）。
+  let child = null;
+  const stopChild = () => {
+    if (!child) return;
+    try { child.kill('SIGTERM'); } catch { /* already gone */ }
+    const captured = child;
+    setTimeout(() => { try { captured.kill('SIGKILL'); } catch { /* already gone */ } }, 5000).unref?.();
+    child = null;
+  };
+
   /** Run one headless dsh conversation and return the final text, or throw.
    *  The llm bridge must not kill generation if it fails: worst case the child
    *  errors with MISSING_CREDENTIAL and the offline fallback kicks in. */
@@ -801,12 +817,14 @@ export function apply(ctx, config) {
       reject(new PromptTipsError(`无法启动 headless：${error?.message ?? error}`));
       return;
     }
+    child = proc;
     let stdout = '';
     let stderr = '';
     let settled = false;
     const finish = (error, value) => {
       if (settled) return;
       settled = true;
+      if (child === proc) child = null;
       clearTimeout(timer);
       if (error) reject(error); else resolvePromise(value);
     };
@@ -834,6 +852,7 @@ export function apply(ctx, config) {
       const prompt = buildHeadlessPrompt(entry, {
         businessContext: cfg.businessContext,
         recentTitles: state.bubbles.slice(0, 6).map((b) => b.title).filter(Boolean),
+        modelHint: cfg.modelHint,
       });
       const answer = await runHeadless(prompt);
       const why = normaliseWhy(extractJson(answer)?.why);
@@ -957,7 +976,7 @@ export function apply(ctx, config) {
     arm();
   };
 
-  ctx.effect(() => () => { clearPending(); }, 'prompt-tips.timer');
+  ctx.effect(() => () => { clearPending(); stopChild(); }, 'prompt-tips.timer');
 
   // --- transport -----------------------------------------------------------
   ctx.inject?.(['connection'], (scope) => {

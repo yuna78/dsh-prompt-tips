@@ -57,7 +57,8 @@ dsh plugin --profile web add dsh-plugin-prompt-tips
     maxHistory: 10          # 历史硬上限
     dailyLimit: 24
     headless: true          # false = 只用资料库预写理由，不花模型调用
-    timeoutMs: 120000
+    timeoutMs: 180000       # headless 子进程超时；超时只会放弃本轮并降级
+    modelHint: ''           # 可选：约束个性化理由的语言风格，如「直接、少废话」
     syncUrl: ''             # 空 = 默认 GitHub raw；私有镜像可覆盖
     syncTimeoutMs: 30000
     businessContext: |-
